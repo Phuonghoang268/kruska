@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 class MyDraw extends JPanel implements MouseListener, MouseMotionListener {
 	private static final long serialVersionUID = 1L;
-	public static int change=1;
+	public static int change=0;
 	public MyData data = new MyData();
 	private ArrayList<Integer> arrPointResultStep = new ArrayList<Integer>();
 	private int len[];

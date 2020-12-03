@@ -16,12 +16,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Kruska extends JFrame implements ActionListener {
-    private Color colorBackGround = Color.lightGray, colorCost = Color.white,
-            colorIndex = Color.black, colorDraw = Color.white,
-            colorStep = Color.getHSBColor(50, 50, 50),
-            colorStepMin = Color.blue, colorResult = Color.red;
-    private int sizeLine = 1, sizeLineResult = 2;
-    private boolean typeMap = false;
     private static final long serialVersionUID = 1L;
     private JFrame frameAbout, frameHelp;
     private String[] listGraphDemo = { "0", "1", "2", "3", "4", "5" };
@@ -378,7 +372,9 @@ public class Kruska extends JFrame implements ActionListener {
         }
 
     }
-
+    public static void main(String [] args ){
+        new Kruska();
+    }
 
 }
 
