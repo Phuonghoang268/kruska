@@ -324,14 +324,13 @@ public class Kruska extends JFrame implements ActionListener {
      * cái này khi click runstep thi nó chạy. Nhưng nó chỉ hiện kết quả cuối cùng
      */
     private void runStep() {
-        myDraw.reDraw=true;
+        MyDraw.reDraw=true;
 //        double min=myDraw.data.getArrMyLine().get(1).getCost();
 //        for(int i=2;i<myDraw.data.getArrMyLine().size();i++){
 //            if(min>myDraw.data.getArrMyLine().get(i).getCost()){
 //                min=myDraw.data.getArrMyLine().get(i).getCost();
 //            }
 //        }
-        MyDraw.change++;
 //        for(int i=1;i<myDraw.data.getArrMyLine().size();i++){
 //            if(myDraw.data.getArrMyLine().get(i).getCost()==min){
 //

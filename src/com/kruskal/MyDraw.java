@@ -4,9 +4,7 @@ import javafx.animation.AnimationTimer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.io.*;
@@ -16,7 +14,7 @@ import java.util.ArrayList;
  * ----------------- @author nguyenvanquan7826 -----------------
  * ---------------nguyenvanquan7826.wordpress.com --------------
  */
-class MyDraw extends JPanel implements MouseListener, MouseMotionListener {
+class MyDraw extends JPanel implements MouseListener, MouseMotionListener, ActionListener {
 	private static final long serialVersionUID = 1L;
 	public static int change=0;
 	public MyData data = new MyData();
@@ -38,14 +36,31 @@ class MyDraw extends JPanel implements MouseListener, MouseMotionListener {
 	private int sizeLine = 1, sizeLineResult = 2;
 	private boolean drawResult = false;
 	private boolean drawStep = false;
-	public boolean reDraw = false;
+	public static boolean reDraw = false;
+	public boolean check=false;
 	private boolean resetGraph = false;
 	private boolean typeMap = false;
 	private boolean checkedPointMin[];
 	private int indexBeginPoint, indexEndPoint;
 	private int drawWith, drawHeight;
+	public Timer timer=new Timer(1000, this);
 
+	/**
+	 * new
+	 */
+
+	/**
+	 * để chuyển màn hình trong 1s
+	 */
+
+	public void actionPerformed(ActionEvent ev){
+		if(ev.getSource()==timer){
+			repaint();// this will call at every 1 second
+		}
+
+	}
 	public MyDraw() {
+		timer.start();
 		init();
 		addMouseMotionListener(this);
 		addMouseListener(this);
@@ -65,14 +80,9 @@ class MyDraw extends JPanel implements MouseListener, MouseMotionListener {
 		// draw line
 		reDraw(g2d, false,-1);
 
-		// draw Step
-//		if (drawStep) {
-//			drawResultStep(g2d);
-//			// drawStep = false;
-//		}
-
 		// redraw the begin graph
 		if (reDraw) {
+			change++;//chuyen canh
 			reDraw(g2d, false,change);
 		}
 
@@ -83,6 +93,8 @@ class MyDraw extends JPanel implements MouseListener, MouseMotionListener {
 			resetGraph = false;
 		}
 	}
+
+
 
 	@Override
 	public void mouseClicked(MouseEvent e) { // click
