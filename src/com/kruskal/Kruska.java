@@ -325,17 +325,7 @@ public class Kruska extends JFrame implements ActionListener {
      */
     private void runStep() {
         MyDraw.reDraw=true;
-//        double min=myDraw.data.getArrMyLine().get(1).getCost();
-//        for(int i=2;i<myDraw.data.getArrMyLine().size();i++){
-//            if(min>myDraw.data.getArrMyLine().get(i).getCost()){
-//                min=myDraw.data.getArrMyLine().get(i).getCost();
-//            }
-//        }
-//        for(int i=1;i<myDraw.data.getArrMyLine().size();i++){
-//            if(myDraw.data.getArrMyLine().get(i).getCost()==min){
-//
-//            }
-//        }
+
         myDraw.repaint();
     }
 

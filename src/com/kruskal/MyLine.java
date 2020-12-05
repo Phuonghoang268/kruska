@@ -9,6 +9,7 @@ class MyLine implements Serializable {
 	private Line2D.Double l = new Line2D.Double();
 	private int indexPointA, indexPointB;
 	private int cost;
+	public Color colo=Color.white;
 
 	final int barb = 10;
 	final int r = 15;

@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 class MyDraw extends JPanel implements MouseListener, MouseMotionListener, ActionListener {
 	private static final long serialVersionUID = 1L;
-	public static int change=0;
+	public static int change=1;
 	public MyData data = new MyData();
 	private ArrayList<Integer> arrPointResultStep = new ArrayList<Integer>();
 	private int len[];
@@ -77,13 +77,39 @@ class MyDraw extends JPanel implements MouseListener, MouseMotionListener, Actio
 		super.paintComponent(g);
 		setBackground(colorBackGround);
 		Graphics2D g2d = (Graphics2D) g;
+		int changer=0;
 		// draw line
 		reDraw(g2d, false,-1);
 
 		// redraw the begin graph
 		if (reDraw) {
-			change++;//chuyen canh
+			while(data.getArrMyLine().get(change).colo==Color.blue
+					&&change<data.getArrMyLine().size()-1) change++;
+			double min=data.getArrMyLine().get(change).getCost();
+
+			for(int i=change;i<data.getArrMyLine().size();i++){
+				if(min>data.getArrMyLine().get(i).getCost()
+						&&data.getArrMyLine().get(change).colo!=Color.blue){
+					min=data.getArrMyLine().get(i).getCost();
+				}
+			}
+			System.out.printf(change+" " );
+			if(data.getArrMyLine().get(change).colo!=Color.blue
+					&&data.getArrMyLine().get(change).getCost()==min){
+				data.getArrMyLine().get(change).colo=Color.blue;
+				System.out.printf(change+" " );
+
+			}
+			for(int i=change+1;i<data.getArrMyLine().size();i++){
+				if(data.getArrMyLine().get(i).getCost()==min){
+					change=i;
+					break;
+				}
+			}
+			data.getArrMyLine().get(change).colo=Color.blue;//chuyen canh
 			reDraw(g2d, false,change);
+			if(change==data.getArrMyLine().size()-1) change=1;
+			System.out.println(change);
 		}
 
 		// reset graph to graph space
@@ -324,19 +350,10 @@ class MyDraw extends JPanel implements MouseListener, MouseMotionListener, Actio
 	private void reDraw(Graphics2D g2d, boolean checkReDraw,int t) {
 		resetGraph(g2d);
 		for (int i = 0; i < data.getArrMyLine().size(); i++) {
-			if(i!=t){
-				data.getArrMyLine().get(i).drawLine(g2d,
-						data.getArrMyPoint().get(data.getArrMyLine().get(i).getIndexPointA()).getP(),
-						data.getArrMyPoint().get(data.getArrMyLine().get(i).getIndexPointB()).getP(),
-						colorCost, colorDraw, sizeLine, typeMap);
-			}
-			else {
-				data.getArrMyLine().get(i).drawLine(g2d,
-						data.getArrMyPoint().get(data.getArrMyLine().get(i).getIndexPointA()).getP(),
-						data.getArrMyPoint().get(data.getArrMyLine().get(i).getIndexPointB()).getP(),
-						colorCost, Color.BLUE, sizeLine, typeMap);
-			}
-
+			data.getArrMyLine().get(i).drawLine(g2d,
+					data.getArrMyPoint().get(data.getArrMyLine().get(i).getIndexPointA()).getP(),
+					data.getArrMyPoint().get(data.getArrMyLine().get(i).getIndexPointB()).getP(),
+					colorCost, data.getArrMyLine().get(i).colo, sizeLine, typeMap);
 		}
 
 		// draw point
