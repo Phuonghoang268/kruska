@@ -89,27 +89,36 @@ class MyDraw extends JPanel implements MouseListener, MouseMotionListener, Actio
 
 			for(int i=change;i<data.getArrMyLine().size();i++){
 				if(min>data.getArrMyLine().get(i).getCost()
-						&&data.getArrMyLine().get(change).colo!=Color.blue){
+						&&data.getArrMyLine().get(i).colo!=Color.blue){
 					min=data.getArrMyLine().get(i).getCost();
 				}
 			}
-			System.out.printf(change+" " );
 			if(data.getArrMyLine().get(change).colo!=Color.blue
 					&&data.getArrMyLine().get(change).getCost()==min){
 				data.getArrMyLine().get(change).colo=Color.blue;
-				System.out.printf(change+" " );
-
+				data.getArrMyPoint().get(data.getArrMyLine().get(change).getIndexPointA()).colo=Color.red;
+				data.getArrMyPoint().get(data.getArrMyLine().get(change).getIndexPointB()).colo=Color.red;
 			}
 			for(int i=change+1;i<data.getArrMyLine().size();i++){
 				if(data.getArrMyLine().get(i).getCost()==min){
 					change=i;
 					break;
+
 				}
 			}
+
 			data.getArrMyLine().get(change).colo=Color.blue;//chuyen canh
+			data.getArrMyPoint().get(data.getArrMyLine().get(change).getIndexPointA()).colo=Color.red;
+			data.getArrMyPoint().get(data.getArrMyLine().get(change).getIndexPointB()).colo=Color.red;
 			reDraw(g2d, false,change);
-			if(change==data.getArrMyLine().size()-1) change=1;
-			System.out.println(change);
+
+			int i;
+			for(i=change+1;i<data.getArrMyLine().size();i++){
+				if(data.getArrMyLine().get(i).getCost()==min){
+					break;
+				}
+			}
+			if(i==data.getArrMyLine().size()) change=1;
 		}
 
 		// reset graph to graph space
@@ -358,7 +367,7 @@ class MyDraw extends JPanel implements MouseListener, MouseMotionListener, Actio
 
 		// draw point
 		for (int i = 1; i < data.getArrMyPoint().size(); i++) {
-			data.getArrMyPoint().get(i).draw(g2d, i, colorDraw, colorIndex);
+			data.getArrMyPoint().get(i).draw(g2d, i, data.getArrMyPoint().get(i).colo, colorIndex);
 		}
 	}
 

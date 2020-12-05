@@ -9,6 +9,7 @@ public class MyPoint implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Ellipse2D.Float el = new Ellipse2D.Float();
 	private Point p = new Point();
+	public Color colo=Color.white;
 
 	final int r = 15;
 
